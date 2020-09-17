@@ -1,9 +1,9 @@
 language: php
 
 php:
-  - 7.0
-  - 7.1
   - 7.2
+  - 7.3
+  - 7.4
 
 env:
   matrix:
@@ -16,11 +16,11 @@ cache:
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - travis_retry composer update $COMPOSER_FLAGS --no-interaction --prefer-source
 
 script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
-  - composer require scrutinizer/ocular --dev
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover --exclude-group=cron-task
+  - wget https://scrutinizer-ci.com/ocular.phar
 
 after_script:
-  - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

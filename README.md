@@ -1,4 +1,4 @@
-# Very short description of the package
+# Robots.txt generator service
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -18,21 +18,15 @@ You can install the package via composer:
 composer require mad-web/laravel-robots
 ```
 
-_*For Laravel <= 5.4*_ - Now add the service provider in config/app.php file:
-```php
-'providers' => [
-    // ...
-    MadWeb\Robots\RobotsServiceProvider::class,
-];
-```
-
 ## Usage
 
 Setting a condition in your `AppServiceProvider` that determines whether the site should be indexed.
 ```php
+use MadWeb\Robots\RobotsFacade;
+
 public function boot()
 {
-    Robots::setShouldIndexCallback(function () {
+    RobotsFacade::setShouldIndexCallback(function () {
         return app()->environment('production');
     });
     ...
