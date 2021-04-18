@@ -2,9 +2,10 @@
 
 namespace MadWeb\Robots;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class RobotsServiceProvider extends ServiceProvider
+class RobotsServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
